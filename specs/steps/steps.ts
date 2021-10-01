@@ -4,10 +4,7 @@ import {
 } from '../../src/keyboard-event-to-string'
 
 import { Step, Table, BeforeSuite, AfterSuite } from "gauge-ts";
-
-function assertEqual(a: string, expected: string){
-  if (a !== expected) throw new Error(`Expected ${expected}, but got ${a}`)
-}
+import * as assert from 'assert'
 
 export default class Steps {
 
@@ -19,7 +16,7 @@ export default class Steps {
 
     const s = toString(event)
 
-    assertEqual(s, expected)
+    assert.equal(s, expected)
   }
 
   @Step("an event with the command and <KeyA> key produces <Cmd + KeyA>")
@@ -31,7 +28,7 @@ export default class Steps {
 
     const s = toString(event)
 
-    assertEqual(s, expected)
+    assert.equal(s, expected)
   }
 
   @Step("an event with the shift and <KeyA> key produces <Cmd + KeyA>")
@@ -43,7 +40,7 @@ export default class Steps {
 
     const s = toString(event)
 
-    assertEqual(s, expected)
+    assert.equal(s, expected)
   }
 
   @Step("an event with the control and <KeyA> key produces <Cmd + KeyA>")
@@ -55,7 +52,7 @@ export default class Steps {
 
     const s = toString(event)
 
-    assertEqual(s, expected)
+    assert.equal(s, expected)
   }
 
   @Step("an event with command and shift and <arg1> key produces <arg2>")
@@ -68,7 +65,7 @@ export default class Steps {
 
     const s = toString(event)
 
-    assertEqual(s, expected)
+    assert.equal(s, expected)
   }
 
   @Step("an event with control and shift and <arg1> key produces <arg2>")
@@ -81,7 +78,7 @@ export default class Steps {
 
     const s = toString(event)
 
-    assertEqual(s, expected)
+    assert.equal(s, expected)
   }
 
   @Step("Configure: <Table>")

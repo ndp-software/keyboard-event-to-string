@@ -6,8 +6,6 @@ The idea is to use this for UI components that let the user choose keyboard shor
 
 In other words: This library provides the inverse functionality to common keyboard shortcut binding libraries like [keymaster](https://github.com/madrobby/keymaster) or [Mousetrap](https://craig.is/killing/mice).
 
-[![js-standard-style](https://cdn.rawgit.com/feross/standard/master/badge.svg)](https://github.com/feross/standard)
-
 ## Installation
 
 ```
@@ -73,6 +71,15 @@ It returns an object with this information:
 - ~~JavaScript keyCodes don't work well with special international characters. E.g. the German umlaut `ö` has the same keyCode as `;`, on a German keyboard. This library doesn't try to fix that and I don't think there's a good fix for all those special cases. Other keyboard shortcut libraries (Mousetrap/keymaster e.g.) have the same problem, so it shouldn't be a big problem since this library is meant to be used as a helper for those libraries~~ This library now uses KeyboardEvent.code, per current recommendations. The names of some of the keys may not be exactly what is desired, but they are "standard".
 - Andrew Peterson converted this library to Typescript in 2021 to suit a web project. Feel free to offer contributions.
 - In 2021, this was subtly renamed from `key-` to `keyboard-` so that it would be easier to publish the NPM package.
+
+## Development
+
+Code of conduct, and all that stuff.
+
+This uses gauge for tests. There's a bit of tweaking to get typescript/gauge to work. To 
+run tests, `yarn test`.
+
+To release, adjust the version number and `npm release`.
 
 ## Credits
 
