@@ -10,7 +10,7 @@
   "scripts": {
     "test": "TS_NODE_COMPILER_OPTIONS='{\"lib\": [\"ES5\",\"ES6\", \"ES7\", \"ES2017\", \"ES2018\", \"ES2019\", \"ES2020\", \"dom\"],\"experimentalDecorators\": true,\"emitDecoratorMetadata\": true, \"target\": \"es6\", \"module\": \"commonjs\",\"moduleResolution\": \"node\",\"outDir\": \"./tmp\" }' gauge run specs/basic.spec",
     "build": "rm -rf ./dist/* && node_modules/.bin/tsc -p tsconfig.json && node_modules/.bin/tsc -p tsconfig-cjs.json",
-    "prepublishOnly": "npx run build"
+    "prepublishOnly": "yarn build"
   },
   "repository": {
     "type": "git",
