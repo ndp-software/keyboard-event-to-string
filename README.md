@@ -73,3 +73,7 @@ It returns an object with this information:
 - ~~JavaScript keyCodes don't work well with special international characters. E.g. the German umlaut `ö` has the same keyCode as `;`, on a German keyboard. This library doesn't try to fix that and I don't think there's a good fix for all those special cases. Other keyboard shortcut libraries (Mousetrap/keymaster e.g.) have the same problem, so it shouldn't be a big problem since this library is meant to be used as a helper for those libraries~~ This library now uses KeyboardEvent.code, per current recommendations. The names of some of the keys may not be exactly what is desired, but they are "standard".
 - Andrew Peterson converted this library to Typescript in 2021 to suit a web project. Feel free to offer contributions.
 - In 2021, this was subtly renamed from `key-` to `keyboard-` so that it would be easier to publish the NPM package.
+
+## Credits
+
+- used a [Log Rocket blog post](https://blog.logrocket.com/publishing-node-modules-typescript-es-modules/) to create the typescript package.
