@@ -1,2 +1,8 @@
+# Gauge - metadata dir
+.gauge
+logs
+reports
 dist/
 node_modules/
+yarn-error.log
+

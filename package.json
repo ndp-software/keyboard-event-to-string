@@ -4,10 +4,12 @@
   "description": " Converts a JavaScript keyboard event object into a humanly readable string",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
-  "files": ["dist/"],
+  "files": [
+    "dist/"
+  ],
   "scripts": {
+    "test": "TS_NODE_COMPILER_OPTIONS='{\"lib\": [\"ES5\",\"ES6\", \"ES7\", \"ES2017\", \"ES2018\", \"ES2019\", \"ES2020\", \"dom\"],\"experimentalDecorators\": true,\"emitDecoratorMetadata\": true, \"target\": \"es6\", \"module\": \"commonjs\",\"moduleResolution\": \"node\",\"outDir\": \"./tmp\" }' gauge run specs/basic.spec",
     "build": "rm -rf ./dist/* && tsc -p tsconfig.json && tsc -p tsconfig-cjs.json",
-    "test": "test",
     "prepublishOnly": "npx run build"
   },
   "repository": {
@@ -34,6 +36,9 @@
   },
   "homepage": "https://github.com/ndp-software/keyboard-event-to-string#readme",
   "devDependencies": {
+    "@getgauge/cli": "^1.4.1",
+    "@types/node": "^16.10.2",
+    "gauge-ts": "latest",
     "typescript": "^4.4.3"
   }
 }
