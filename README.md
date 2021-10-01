@@ -1,9 +1,8 @@
 # JavaScript keyboard events to strings
 
-This library helps converting the event object of a JavaScript keydown event
+This library converts the event object of a JavaScript keydown event
 into a humanly readable format.
-The idea is to use this for UI components that let the user choose keyboard
-shortcuts.
+The idea is to use this for UI components that let the user choose keyboard shortcuts.
 
 In other words: This library provides the inverse functionality to common keyboard shortcut binding libraries like [keymaster](https://github.com/madrobby/keymaster) or [Mousetrap](https://craig.is/killing/mice).
 
@@ -12,13 +11,16 @@ In other words: This library provides the inverse functionality to common keyboa
 ## Installation
 
 ```
-$ npm install --save key-event-to-string
+$ npm install --save keyboard-event-to-string
 ```
 
 ## Usage
 
 ```js
-var event2string = require('key-event-to-string')(options)
+import {
+  toString as event2String,
+  setOptions
+} from 'keyboard-event-to-string'
 
 document.body.onkeydown = (e) => {
 	var keys = event2string(e)
@@ -68,4 +70,6 @@ It returns an object with this information:
 
 - This library is meant to parse only `keydown` events. `keypress` / `keyup` events have small differences, e..g. `keydown` is needed to capture `Command` on a Mac. So `keydown` is advisible for this anyways.
 - I wrote this library for an Electron side project, so I only needed it to run in the Chrome runtime. It probably won't work well in old browsers
-- JavaScript keyCodes don't work well with special international characters. E.g. the German umlaut `ö` has the same keyCode as `;`, on a German keyboard. This library doesn't try to fix that and I don't think there's a good fix for all those special cases. Other keyboard shortcut libraries (Mousetrap/keymaster e.g.) have the same problem, so it shouldn't be a big problem since this library is meant to be used as a helper for those libraries
+- ~~JavaScript keyCodes don't work well with special international characters. E.g. the German umlaut `ö` has the same keyCode as `;`, on a German keyboard. This library doesn't try to fix that and I don't think there's a good fix for all those special cases. Other keyboard shortcut libraries (Mousetrap/keymaster e.g.) have the same problem, so it shouldn't be a big problem since this library is meant to be used as a helper for those libraries~~ This library now uses KeyboardEvent.code, per current recommendations. The names of some of the keys may not be exactly what is desired, but they are "standard".
+- Andrew Peterson converted this library to Typescript in 2021 to suit a web project. Feel free to offer contributions.
+- In 2021, this was subtly renamed from `key-` to `keyboard-` so that it would be easier to publish the NPM package.
