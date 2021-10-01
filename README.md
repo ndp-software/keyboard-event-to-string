@@ -41,20 +41,27 @@ document.body.onkeydown = (e) => {
 For example this could be used to get the Mac style keyboard shortcut strings:
 
 ```js
-{
+import { setOptions } from 'keyboard-event-to-string'
+setOptions({
 	cmd: "⌘",
 	ctrl: "⌃",
 	alt: "⌥",
 	shift: "⇧",
 	joinWith: ""
-}
+})
 ```
 
 The default settings are compatible with the format that common keyboard shortcut libraries, like [keymaster](https://github.com/madrobby/keymaster) or [Mousetrap](https://craig.is/killing/mice), accept.
 
+To restore to the defaults, use `setOptions({})`.
+
 ### Detailed information
 
-`require('key-event-to-string').details(e)` can be used to get more details. This can be useful for
+```js
+import { details } from 'keyboard-event-to-string'
+```
+
+`details` can be used to get more details. This can be useful for
 validating keyboard shortcuts, e.g. for requiring a modifier and a normal key.
 It returns an object with this information:
 
@@ -64,22 +71,33 @@ It returns an object with this information:
   other key is pressed
 
 
+
+## Release Notes
+- In Sept 2021, I renamed this from `key-` to `keyboard-` so that I could publish (my own) NPM package.
+- I (Andrew Peterson) converted this library to Typescript in 2021 to suit a web project. Feel free to offer contributions.
+- It now uses the `code` of the `KeyboardEvent`. This is _different_. This will not be backward
+  compatible.
+
 ## Disclaimer
 
+### V1
 - This library is meant to parse only `keydown` events. `keypress` / `keyup` events have small differences, e..g. `keydown` is needed to capture `Command` on a Mac. So `keydown` is advisible for this anyways.
 - I wrote this library for an Electron side project, so I only needed it to run in the Chrome runtime. It probably won't work well in old browsers
 - ~~JavaScript keyCodes don't work well with special international characters. E.g. the German umlaut `ö` has the same keyCode as `;`, on a German keyboard. This library doesn't try to fix that and I don't think there's a good fix for all those special cases. Other keyboard shortcut libraries (Mousetrap/keymaster e.g.) have the same problem, so it shouldn't be a big problem since this library is meant to be used as a helper for those libraries~~ This library now uses KeyboardEvent.code, per current recommendations. The names of some of the keys may not be exactly what is desired, but they are "standard".
-- Andrew Peterson converted this library to Typescript in 2021 to suit a web project. Feel free to offer contributions.
-- In 2021, this was subtly renamed from `key-` to `keyboard-` so that it would be easier to publish the NPM package.
 
 ## Development
 
 Code of conduct, and all that stuff.
 
-This uses gauge for tests. There's a bit of tweaking to get typescript/gauge to work. To 
-run tests, `yarn test`.
+This project depends on `yarn`. You'll need to do that before you can run `yarn install`. 
 
-To release, adjust the version number and `npm release`.
+This uses [Gauge](https://docs.gauge.org/overview.html) for tests. You can write tests in 
+markdown, and avoid all the ugly nesting and async/await of most JS testing frameworks.
+This should be installed automatically with your `yarn install`. 
+There's a bit of tweaking to get typescript/gauge to work,
+which is sitting there raw, in `package.json`. Don't look at it please. 😉 To run tests, `yarn test`.
+
+To release, adjust the version number and `npm publish`.
 
 ## Credits
 
