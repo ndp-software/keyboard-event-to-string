@@ -23,9 +23,9 @@ type KeyMap = {
 }
 
 const defaultOptions = {
+  alt:      'Alt',
   cmd:      'Cmd',
   ctrl:     'Ctrl',
-  alt:      'Alt',
   shift:    'Shift',
   joinWith: ' + '
 }
@@ -35,7 +35,7 @@ let gOptions: Options = defaultOptions
 
 function buildKeyMap (e: KeyboardEvent): KeyMap {
   const isOnlyModifier = [16, 17, 18, 91, 93, 224].indexOf(e.keyCode) !== -1
-  const character      = isOnlyModifier ? null : e.code
+  const character      = isOnlyModifier ? null : e.code.replace(/^Key([A-Z01-9])/,'$1')
 
   return {
     character: character,
