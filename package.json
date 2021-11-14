@@ -1,9 +1,9 @@
 {
   "name": "keyboard-event-to-string",
-  "version": "2.0.0-prerelease.02",
+  "version": "2.0.0-prerelease.03",
   "description": " Converts a JavaScript keyboard event object into a humanly readable string",
-  "main": "./dist/cjs/index.js",
-  "module": "./dist/esm/index.js",
+  "main": "./dist/cjs/keyboard-event-to-string.js",
+  "module": "./dist/esm/keyboard-event-to-string.js",
   "files": [
     "dist/"
   ],
@@ -26,7 +26,7 @@
     "keydown",
     "keyup"
   ],
-  "author": [
+  "authors": [
     "Florian Hartmann",
     "Andrew J Peterson"
   ],

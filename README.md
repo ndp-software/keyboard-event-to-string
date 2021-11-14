@@ -1,4 +1,4 @@
-# JavaScript keyboard events to strings
+JavaScript keyboard events to strings
 
 This library converts the event object of a JavaScript keydown event
 into a humanly readable format.
@@ -97,7 +97,7 @@ This should be installed automatically with your `yarn install`.
 There's a bit of tweaking to get typescript/gauge to work,
 which is sitting there raw, in `package.json`. Don't look at it please. 😉 To run tests, `yarn test`.
 
-To release, adjust the version number and `npm publish`.
+To release, adjust the version number in `package.json` and `npm publish`.
 
 ## Credits
 
