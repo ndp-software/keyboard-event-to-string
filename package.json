@@ -17,6 +17,7 @@
     "url": "git+ssh://git@github.com/ndp-software/keyboard-event-to-string.git"
   },
   "keywords": [
+    "front-end",
     "dom",
     "events",
     "keyboard",
