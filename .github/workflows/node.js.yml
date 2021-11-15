@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [16.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -27,8 +27,10 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: curl -SsL https://downloads.gauge.org/stable | sh
-    - run: gauge install javascript
+    - run: gauge install js
+    - run: gauge install ts
     - run: gauge install screenshot
+    - run: gauge install html-report
     - run: yarn install
     - run: yarn build
     - run: yarn test
