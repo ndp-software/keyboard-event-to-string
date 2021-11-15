@@ -26,6 +26,9 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    - run: npm ci
+    - run: curl -SsL https://downloads.gauge.org/stable | sh
+    - run: gauge install javascript
+    - run: gauge install screenshot
+    - run: yarn install
     - run: yarn build
     - run: yarn test
