@@ -1,10 +1,6 @@
 JavaScript keyboard events to strings
 
-This library converts the event object of a JavaScript keydown event
-into a humanly readable format.
-The idea is to use this for UI components that let the user choose keyboard shortcuts.
-
-In other words: This library provides the inverse functionality to common keyboard shortcut binding libraries like [keymaster](https://github.com/madrobby/keymaster) or [Mousetrap](https://craig.is/killing/mice).
+This library converts the event object of a JavaScript keydown event into a humanly readable format. The idea is to use this for UI components that let the user choose keyboard shortcuts. It can also be used as a developer-facing tool so keyboard shortcuts have a single, canonical string name (like in a big switch statement).
 
 ## Installation
 
@@ -16,19 +12,18 @@ $ npm install --save keyboard-event-to-string
 
 ```js
 import {
-  toString as event2String,
-  setOptions
+  toString as event2String
 } from 'keyboard-event-to-string'
 
 document.body.onkeydown = (e) => {
 	var keys = event2string(e)
-	console.log(keys) // e.g. "Ctrl + A"
+	console.log(keys) // e.g. "Ctrl + KeyA"
 }
 ```
 
 ### Options
 
-`options` is optional and can be an object with the following properties:
+`options` , if used, is an object with some or all of the following properties:
 
 | key | value | default value |
 |:--|:--|:--|
@@ -36,9 +31,10 @@ document.body.onkeydown = (e) => {
 | `ctrl` |  What string to display for the Ctrl modifier | `"Ctrl"` |
 | `alt` |  What string to display for the Alt/Option modifier | `"Alt"` |
 | `shift` |  What string to display for the Shift modifier | `"Shift"` |
-| `joinWith` | The string that's displayed between all keys | `" + "`
+| `joinWith` | The string that's displayed between all keys | `" + "`  |
+| `hideKey` | Whether to remove the "Key" from the front of key names | `"never"` |
 
-For example this could be used to get the Mac style keyboard shortcut strings:
+For example this could be used to get the Mac style keyboard shortcut strings globally:
 
 ```js
 import { setOptions } from 'keyboard-event-to-string'
@@ -47,11 +43,14 @@ setOptions({
 	ctrl: "⌃",
 	alt: "⌥",
 	shift: "⇧",
-	joinWith: ""
+	joinWith: "",
+  hideKey: 'always'
 })
 ```
 
 The default settings are compatible with the format that common keyboard shortcut libraries, like [keymaster](https://github.com/madrobby/keymaster) or [Mousetrap](https://craig.is/killing/mice), accept.
+
+If you're trying to make the information readable by users, the default key names are awkward.  The word "Key" is prefixed to many of the key names, which is obvious or redundant. The `hideKey` option allows filtering the word out, either globally or conditionally. The permitted values are: `'never' | 'always' | 'alpha' | 'alphanumeric'`.
 
 To restore to the defaults, use `setOptions({})`.
 
@@ -61,7 +60,7 @@ To restore to the defaults, use `setOptions({})`.
 import { details } from 'keyboard-event-to-string'
 ```
 
-`details` can be used to get more details. This can be useful for
+`details` can be used to get more details on an event. This can be useful for
 validating keyboard shortcuts, e.g. for requiring a modifier and a normal key.
 It returns an object with this information:
 
@@ -70,13 +69,12 @@ It returns an object with this information:
 - `map`: An object containing information which modifier is active and what
   other key is pressed
 
-
-
 ## Release Notes
-- In Sept 2021, I renamed this from `key-` to `keyboard-` so that I could publish (my own) NPM package.
-- I (Andrew Peterson) converted this library to Typescript in 2021 to suit a web project. Feel free to offer contributions.
-- It now uses the `code` of the `KeyboardEvent`. This is _different_. This will not be backward
-  compatible.
+- 2.1.0 Add configuration of "hideKey"
+- 2.0.0 November 2021. First official typescript release. 
+- In Sept 2021, I (ndp) renamed this from `key-` to `keyboard-` so that I could publish my forked NPM package.
+- In 2021, I (ndp) converted this library to Typescript to suit a web project [AmpWhat](https://www.amp-what.com). Feel free to offer contributions.
+- This now uses the `code` of the `KeyboardEvent`, per general recommendations. This is _different_. This will not be backward compatible.
 
 ## Disclaimer
 
@@ -93,12 +91,11 @@ This project depends on `yarn`. You'll need to do that before you can run `yarn 
 
 This uses [Gauge](https://docs.gauge.org/overview.html) for tests. You can write tests in 
 markdown, and avoid all the ugly nesting and async/await of most JS testing frameworks.
-This should be installed automatically with your `yarn install`. 
-There's a bit of tweaking to get typescript/gauge to work,
-which is sitting there raw, in `package.json`. Don't look at it please. 😉 To run tests, `yarn test`.
+This should be installed automatically with your `yarn install`.  To run tests, `yarn test`.
 
 To release, adjust the version number in `package.json` and `npm publish`.
 
 ## Credits
 
 - used a [Log Rocket blog post](https://blog.logrocket.com/publishing-node-modules-typescript-es-modules/) to create the typescript package.
+- the original package included this comment, and I'm not sure it's that relevant any more: "This library provides the inverse functionality to common keyboard shortcut binding libraries like [keymaster](https://github.com/madrobby/keymaster) or [Mousetrap](https://craig.is/killing/mice)."

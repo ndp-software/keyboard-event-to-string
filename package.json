@@ -1,6 +1,6 @@
 {
   "name": "keyboard-event-to-string",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": " Converts a JavaScript keyboard event object into a humanly readable string",
   "main": "./dist/cjs/keyboard-event-to-string.js",
   "module": "./dist/esm/keyboard-event-to-string.js",

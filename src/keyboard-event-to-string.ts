@@ -7,7 +7,10 @@ type Options = {
   alt: string
   shift: string
   joinWith: string
+  hideKey: HideKeyType
 }
+
+type HideKeyType = 'never' | 'always' | 'alpha' | 'alphanumeric'
 
 type UserOptions = Partial<Options>
 
@@ -22,20 +25,27 @@ type KeyMap = {
   modifiers: Modifiers
 }
 
-const defaultOptions = {
+const defaultOptions: Options = {
   alt:      'Alt',
   cmd:      'Cmd',
   ctrl:     'Ctrl',
   shift:    'Shift',
-  joinWith: ' + '
+  joinWith: ' + ',
+  hideKey:  'never'
 }
 
 let gOptions: Options = defaultOptions
 
+const hideKeyRegExp = () => ({
+  'alphanumeric': /^Key([A-Z01-9])$/,
+  'alpha':        /^Key([A-Z])$/,
+  'always':       /^Key(.*)$/,
+  'never':        /^(.*)$/
+})[gOptions.hideKey]
 
-function buildKeyMap (e: KeyboardEvent): KeyMap {
+function buildKeyMap(e: KeyboardEvent): KeyMap{
   const isOnlyModifier = [16, 17, 18, 91, 93, 224].indexOf(e.keyCode) !== -1
-  const character      = isOnlyModifier ? null : e.code.replace(/^Key([A-Z01-9])/,'$1')
+  const character = isOnlyModifier ? null : e.code.replace(hideKeyRegExp(), '$1')
 
   return {
     character: character,
@@ -48,7 +58,7 @@ function buildKeyMap (e: KeyboardEvent): KeyMap {
   }
 }
 
-function buildKeyArray (e: KeyboardEvent) {
+function buildKeyArray(e: KeyboardEvent){
 
   const map = buildKeyMap(e)
 
@@ -65,7 +75,7 @@ function buildKeyArray (e: KeyboardEvent) {
   return result
 }
 
-export function details (e: KeyboardEvent): { hasKey: boolean, hasModifier: boolean, map: KeyMap } {
+export function details(e: KeyboardEvent): { hasKey: boolean, hasModifier: boolean, map: KeyMap }{
 
   const map = buildKeyMap(e)
 
@@ -78,8 +88,8 @@ export function details (e: KeyboardEvent): { hasKey: boolean, hasModifier: bool
   }
 }
 
-export function setOptions (userOptions: UserOptions): UserOptions {
-  return gOptions = {...defaultOptions, ...userOptions}
+export function setOptions(userOptions: UserOptions): UserOptions{
+  return gOptions = { ...defaultOptions, ...userOptions }
 }
 
 export const toString = (e: KeyboardEvent): string => buildKeyArray(e).join(gOptions.joinWith)
